@@ -2,18 +2,31 @@
 
 usage(){
 	echo "Usage: $(basename "$0") [-h]
-        Looks up the definition of currently selected word."
+	Looks up the definition of currently selected word.
+	-w: Use the wayland clipboard (instead of X11) "
+
 }
 
-while getopts 'h' c
+USEWAYLAND=false
+
+while getopts 'hw' c
 do
 	case $c in
 		h) usage; exit ;;
+		w) USEWAYLAND=true ;;
 		*) usage; exit 1 ;;
 	esac
 done
 
-word=$(xclip -o)
+shift $((OPTIND-1))
+
+if [ $USEWAYLAND = true ]
+then
+	word=$(wl-paste -p)
+else
+	word=$(xclip -o)
+fi
+
 res=$(curl -s "https://api.dictionaryapi.dev/api/v2/entries/en_US/$word")
 regex=$'"definition":"\K(.*?)(?=")'
 definitions=$(echo $res | grep -Po "$regex")
