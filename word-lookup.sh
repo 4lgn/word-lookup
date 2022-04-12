@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 usage(){
 	echo "Usage: $(basename "$0") [-h]
