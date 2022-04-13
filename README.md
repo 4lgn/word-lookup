@@ -4,7 +4,8 @@
 
 ## Requirements
 
-- [xclip](https://github.com/astrand/xclip)
+- [xclip](https://github.com/astrand/xclip) (only for X11)
+- [wl-clipboard](https://github.com/bugaevc/wl-clipboard) (only for wayland)
 - [dunst](https://github.com/dunst-project/dunst)
 
 ## License
